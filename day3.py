@@ -1,8 +1,10 @@
+""" Advent Of Code 2024 Day 3"""
 import re
 import unittest
 
 
-def extract_and_compute(expression):
+def extract_and_compute(expression: str) -> int:
+    """ part 1 """
     # Regular expression to match valid mul instructions of the form mul(a,b)
     pattern = r"mul\((\d+),(\d+)\)"
     matches = re.findall(pattern, expression)
@@ -12,7 +14,8 @@ def extract_and_compute(expression):
     return result
 
 
-def compute_with_do_and_dont(memory):
+def compute_with_do_and_dont(memory: str) -> int:
+    """ part 2 """
     # Regular expressions to match valid instructions
     mul_pattern = r"mul\((\d+),(\d+)\)"
     do_pattern = r"do\(\)"
@@ -45,12 +48,12 @@ def compute_with_do_and_dont(memory):
 class TestCalculations(unittest.TestCase):
 
     def test_part1(self):
-        content = "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))"
-        self.assertEqual(extract_and_compute(content), 161)
+        test_content = "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))"
+        self.assertEqual(extract_and_compute(test_content), 161)
 
     def test_part2(self):
-        content = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"
-        self.assertEqual(compute_with_do_and_dont(content), 48)
+        test_content = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"
+        self.assertEqual(compute_with_do_and_dont(test_content), 48)
 
 
 if __name__ == "__main__":
